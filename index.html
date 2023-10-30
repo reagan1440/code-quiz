@@ -3,22 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" type="./assets/text/css" href="./assets/style.css">
     <title>Code Quiz</title>
 </head>
 <body>
+    <script src="./assets/questions.js" type="text/javascript"></script>
+    <script src=".assets/script.js" type="text/javascript"></script>
     <div class="site">
         <h1> Coding quiz Challenge</h1>
         <p>Do your best to answer the following coding quiz questions</p>
-        <div class="quiz">
-            <h2 id="questions"> First question</h2>
-            <div class="answers">
-                <button>choice 1</button><br>
-                <button>choice 2</button><br>
-                <button>choice 3</button><br>
-                <button>choice 4</button><br>
+        <p>Remember you have a time limit and every wrong answer will take away 10 seconds from your time.</p>
+        <p>When the quiz ends, enter your name to keep your score logged</p>
+        <button aria-label="start-game" id="start-button" class="button">Start Quiz!</button>
+        <div id="quiz-answers">
+                <button class="answer-button"></button><br>
+                <button class="answer-button"></button><br>
+                <button class="answer-button"></button><br>
+                <button class="answer-button"></button><br>
         </div>
+        <div id="answer-input">
+            <label for="name">Enter your name here</label>
+            <input type="text" name="name" id="name" />
+            <button id="submit-button">Submit</button>
+        </div>
+        <div id="answer-prompt"></div>
     </div>
-    </div>
+</div>
 </body>
 </html>
