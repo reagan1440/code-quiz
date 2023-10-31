@@ -15,37 +15,37 @@ const sectionEnd = document.getElementById("end");
 const titleEnd = document.getElementById("end-title");
 const score = document.getElementById("score");
 const inputInitl = document.getElementById("initials");
-const scoresubmission = document.getElementById("submit-score");
+const sumbitscore = document.getElementById("submit-score");
 const errorMsg = document.getElementById("error-message");
 
 class Question {
-  constructor(question, choices, indexOfCorrectChoice) {
+  constructor(question, choices, correctChoice) {
     this.question = question;
     this.choices = choices;
-    this.indexOfCorrectChoice = indexOfCorrectChoice;
+    this.correctChoice = correctChoice;
   }
 }
-const QUESTION_1 = new Question("Commonly used data types DO NOT include: ", 
+const q1 = new Question("Commonly used data types DO NOT include: ", 
   ["Strings", "Booleans", "Alerts", "Numbers"], 2);
-const QUESTION_2 = new Question("The condition in an if / else statement is enclosed within ____.", 
+const q2 = new Question("The condition in an if / else statement is enclosed within ____.", 
   ["Quotes", "Curly brackets", "Parentheses", "Square brackets"], 2);
-const QUESTION_3 = new Question("Arrays in JavaScript can be used to store ____.", 
+const q3 = new Question("Arrays in JavaScript can be used to store ____.", 
   ["Numbers and Strings", "Other arrays", "Booleans", "All of the above"], 3);
-const QUESTION_4 = new Question("String values must be enclosed within _____ when being assigned to variables.", 
+const q4 = new Question("String values must be enclosed within _____ when being assigned to variables.", 
   ["Commas", "Curly brackets", "Quotes", "Parentheses"], 2);
-const QUESTION_5 = new Question("A very useful tool used during development and debugging for printing content to the debugger is: ", 
+const q5 = new Question("A very useful tool used during development and debugging for printing content to the debugger is: ", 
   ["JavaScript", "Terminal/Bash", "For Loops", "console.log"], 3);
-const QUESTION_LIST = [QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_4, QUESTION_5];
+const questionList = [q1, q2, q3, q4, q5];
 
 let currentQuestion = 0;
 
 let totalTime = 75;
-let totalTimeInterval;
-let choiceStatusTimeout; 
+let totalTimeleft;
+let choiceTimeout; 
 
 strtbtn.addEventListener('click', startGame);
 choice.addEventListener('click', processChoice);
-scoresubmission.addEventListener('submit', processInput);
+sumbitscore.addEventListener('submit', processInput);
 
 function startGame() {
   showElement(quizSection, quizsections);
@@ -74,7 +74,7 @@ function displayTime() {
 }
 
 function startTimer() {
-  totalTimeInterval = setInterval(function() {
+  totalTimeleft = setInterval(function() {
     totalTime--;
     displayTime();
     checkTime();
@@ -90,15 +90,15 @@ function checkTime() {
 }
 
 function displayQuestion() {
-  question.textContent = QUESTION_LIST[currentQuestion].question;
+  question.textContent = questionList[currentQuestion].question;
 
-  displayChoiceList();
+  answerListDisplay();
 }
 
-function displayChoiceList() {
+function answerListDisplay() {
   choice.innerHTML = "";
 
-  QUESTION_LIST[currentQuestion].choices.forEach(function(answer, index) {
+  questionList[currentQuestion].choices.forEach(function(answer, index) {
     const li = document.createElement("li");
     li.dataset.index = index;
     const button = document.createElement("button");
@@ -117,7 +117,7 @@ function processChoice(event) {
 }
 
 function resetChoiceStatusEffects() {
-  clearTimeout(choiceStatusTimeout);
+  clearTimeout(choiceTimeout);
   styleTimeRemainingDefault();
 }
 
@@ -138,7 +138,7 @@ function checkChoice(userChoice) {
 }
 
 function isChoiceCorrect(choice) {
-  return choice === QUESTION_LIST[currentQuestion].indexOfCorrectChoice;
+  return choice === questionList[currentQuestion].correctChoice;
 }
 
 function displayWrongChoiceEffects() {
@@ -147,7 +147,7 @@ function displayWrongChoiceEffects() {
   styleTimeRemainingWrong();
   showElement(choicestatus, incorrect);
 
-  choiceStatusTimeout = setTimeout(function() {
+  choiceTimeout = setTimeout(function() {
     hideElement(incorrect);
     styleTimeRemainingDefault();
   }, 1000);
@@ -162,14 +162,14 @@ function deductTimeBy(seconds) {
 function displayCorrectChoiceEffects() {
   showElement(choicestatus, correct);
 
-  choiceStatusTimeout = setTimeout(function() {
+  choiceTimeout = setTimeout(function() {
     hideElement(correct);
   }, 1000);
 }
 
 function getNextQuestion() {
   currentQuestion++;
-  if (currentQuestion >= QUESTION_LIST.length) {
+  if (currentQuestion >= questionList.length) {
     endGame();
   } else {
     displayQuestion();
@@ -177,7 +177,7 @@ function getNextQuestion() {
 }
 
 function endGame() {
-  clearInterval(totalTimeInterval);
+  clearInterval(totalTimeleft);
   
   showElement(quizSection, sectionEnd);
   displayScore();

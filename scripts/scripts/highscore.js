@@ -16,21 +16,21 @@ function addHighscoreTbl(highscores) {
   highscores = JSON.parse(highscores);
 
   highscores.forEach(function(scoreItem, index) {
-    const rankCell = makeRankCell(index + 1);
-    const scoreCell = makeScoreCell(scoreItem.score);
+    const rankCell = makeRank(index + 1);
+    const scoreCell = makeScore(scoreItem.score);
     const initialsCell = makeIntlCell(scoreItem.initials);
     const highscoreTableRow = makeHighScoreTblRow(rankCell, scoreCell, initialsCell);
     highscoretable.appendChild(highscoreTableRow);
   });
 }
 
-function makeRankCell(rank) {
+function makeRank(rank) {
   const rankCell = document.createElement('td');
   rankCell.textContent = `#${rank}`;
   return rankCell;
 }
 
-function makeScoreCell(score) {
+function makeScore(score) {
   const scoreCell = document.createElement('td');
   scoreCell.textContent = score;
   return scoreCell;
