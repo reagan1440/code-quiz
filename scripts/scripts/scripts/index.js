@@ -122,11 +122,11 @@ function resetChoiceStatusEffects() {
 }
 
 function styleTimeRemainingDefault() {
-  timeLeft.style.color = "#4616E8";
+  timeLeft.style.color = "#080";
 }
 
 function styleTimeRemainingWrong() {
-  timeLeft.style.color = "#E81648";
+  timeLeft.style.color = "#080";
 }
 
 function checkChoice(userChoice) {
@@ -190,9 +190,9 @@ function displayScore() {
 
 function setEndHeading() {
   if (totalTime === 0) {
-    titleEnd.textContent = "Sorry! time out!";
+    titleEnd.textContent = "Oh no! Your time is out";
   } else {
-    titleEnd.textContent = "Congrats! Your done!";
+    titleEnd.textContent = "You completed the test!";
   }
 }
 
@@ -220,11 +220,11 @@ function getNewHighscoreEntry(initials, score) {
 function isInputValid(initials) {
   let errorMessage = "";
   if (initials === "") {
-    errorMessage = "You can't submit empty initials!";
+    errorMessage = "Initials cannot be left empty";
     displayFormError(errorMessage);
     return false;
   } else if (initials.match(/[^a-z]/ig)) {
-    errorMessage = "Initials may only include letters."
+    errorMessage = "Initials can only have letters."
     displayFormError(errorMessage);
     return false;
   } else {
