@@ -122,11 +122,11 @@ function resetChoiceStatusEffects() {
 }
 
 function styleTimeRemainingDefault() {
-  timeLeft.style.color = "#080";
+  timeLeft.style.color = "#fff";
 }
 
 function styleTimeRemainingWrong() {
-  timeLeft.style.color = "#080";
+  timeLeft.style.color = "#fff";
 }
 
 function checkChoice(userChoice) {
